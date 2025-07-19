@@ -38,23 +38,24 @@ def generate_sample_data():
     print("🎲 Generating sample sales data...")
     
     try:
-        # Change to the correct directory
-        data_dir = os.path.join(os.path.dirname(__file__), 'data')
-        if not os.path.exists(data_dir):
-            os.makedirs(data_dir)
+        current_dir = os.path.dirname(__file__)
+        data_dir_name = 'data'
+        data_dir_full_path = os.path.join(current_dir,data_dir_name)
+
+        if not os.path.exists(data_dir_full_path):
+            os.makedirs(data_dir_full_path)
         
-        # Import and run the data generator
-        sys.path.append(os.path.dirname(__file__))
+        sys.path.append(current_dir)
+
         from data.sample_data_generator import main as generate_data
         generate_data()
-        
         print("✅ Sample data generated successfully!")
         return True
-        
     except Exception as e:
         print(f"❌ Error generating data: {e}")
         print("💡 You can run 'python data/sample_data_generator.py' manually")
         return False
+
 
 def main():
     """Main setup function."""
